@@ -18,7 +18,7 @@ app.use('/api', apiRouter);
 // Errorhandler should be at the bottom
 app.use(errorhandler());
 
-app.listen(POST, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
