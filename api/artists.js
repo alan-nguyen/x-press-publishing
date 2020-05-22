@@ -3,3 +3,7 @@ const artistsRouter = express.Router();
 const sqlite3 = require('sqlite3');
 
 module.exports = artistsRouter;
+
+const db = new sqlite3.Database(
+  process.env.TEST_DATABASE || './database.sqlite'
+);
