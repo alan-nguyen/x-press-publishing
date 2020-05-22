@@ -12,6 +12,12 @@ const db = new sqlite3.Database(
 artistsRouter.get('/', (req, res, next) => {
   db.all(
     'SELECT * FROM Artist WHERE  Artist.is_currently_employed = 1',
-    (err, artists) => {}
+    (err, artists) => {
+      if (err) {
+        next(err);
+      } else {
+        res.status(200).json({ artists: artists });
+      }
+    }
   );
 });
