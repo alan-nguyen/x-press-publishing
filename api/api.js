@@ -1,7 +1,6 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-module.exports = apiRouter;
 const artistsRouter = require('./artists');
 
 artistsRouter.param('artistId', (req, res, next, artistId) => {
@@ -18,3 +17,19 @@ artistsRouter.param('artistId', (req, res, next, artistId) => {
     }
   });
 });
+
+// GET handler to the router for the / path
+artistsRouter.get('/', (req, res, next) => {
+  db.all(
+    'SELECT * FROM Artist WHERE  Artist.is_currently_employed = 1',
+    (err, artists) => {
+      if (err) {
+        next(err);
+      } else {
+        res.status(200).json({ artists: artists });
+      }
+    }
+  );
+});
+
+module.exports = apiRouter;
